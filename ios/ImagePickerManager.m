@@ -423,7 +423,10 @@ RCT_EXPORT_METHOD(showImagePicker:(NSDictionary *)options callback:(RCTResponseS
                         }
                     }];
                 } else {
-                    [library writeImageToSavedPhotosAlbum:image.CGImage metadata:[info valueForKey:UIImagePickerControllerMediaMetadata] completionBlock:nil];
+                    //BED - 25th May 17 - for front facing camera, the orientation returned is wrong and it saves sideways
+                    // TODO - figure out proper fix
+                    //NSMutableDictionary *metadata = [NSMutableDictionary dictionaryWithDictionary:[info valueForKey:UIImagePickerControllerMediaMetadata]];
+                    [library writeImageToSavedPhotosAlbum:image.CGImage metadata:nil completionBlock:nil];
                 }
             }
         }
